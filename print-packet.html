@@ -1,0 +1,664 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Andean Duct Flutes Build Packet</title><style>
+body { font-family: Arial, sans-serif; color: #111; line-height: 1.35; max-width: 900px; margin: 32px auto; }
+h1 { font-size: 28px; border-bottom: 2px solid #222; padding-bottom: 6px; }
+h2 { font-size: 22px; margin-top: 28px; }
+h3 { font-size: 18px; }
+table { border-collapse: collapse; width: 100%; margin: 12px 0 20px; font-size: 12px; }
+th, td { border: 1px solid #888; padding: 6px; vertical-align: top; }
+th { background: #e8eef8; }
+pre { white-space: pre-wrap; background: #f5f5f5; padding: 10px; border: 1px solid #ddd; }
+.page-break { page-break-before: always; break-before: page; }
+@media print { body { margin: 0.5in; max-width: none; } a { color: #111; } }
+</style></head><body>
+<h1>Andean Duct Flutes Build Packet Print Packet</h1>
+
+<p>Generated: 2026-05-09</p>
+<p>Packet folder: `/tmp/andean-duct-flutes-codex-bob-r3-build-packet`</p>
+
+<h2>File Map</h2>
+
+<table>
+<tr><th>File</th><th>Purpose</th></tr>
+<tr><td>`design.md`</td><td>Project intent, catalog metadata, assumptions, and validation plan.</td></tr>
+<tr><td>`bom.csv`</td><td>Starter bill of materials with part categories, quantities, drawing refs, and notes.</td></tr>
+<tr><td>`sourcing.csv`</td><td>Supplier/search tracker with specs, price/date fields, lead time, substitutes, and risks.</td></tr>
+<tr><td>`cut-list.csv`</td><td>Rough/final stock sizes, material, grain/orientation, operations, yield, and offcuts.</td></tr>
+<tr><td>`drawing-brief.md`</td><td>Manufacturing drawing and technical product sketch brief.</td></tr>
+<tr><td>`assembly-manual.md`</td><td>Shop-facing sequence, tools, fixtures, safety, tuning, finishing, and maintenance notes.</td></tr>
+<tr><td>`validation.csv`</td><td>Target/measured values, tolerance, environment, result, and tuning/build action log.</td></tr>
+<tr><td>`supplier-rfq.md`</td><td>Supplier email/request-for-quote starter.</td></tr>
+<tr><td>`visual-bom-brief.md`</td><td>Art direction for an image-forward visual BOM.</td></tr>
+<tr><td>`wolfram-starter.wl`</td><td>Wolfram starter for physics, optimization, visualization, and validation.</td></tr>
+<tr><td>`CHECKLIST.md`</td><td>Project artifact.</td></tr>
+<tr><td>`README.md`</td><td>Project artifact.</td></tr>
+<tr><td>`family-spec.csv`</td><td>Project artifact.</td></tr>
+<tr><td>`jig-decision.md`</td><td>Project artifact.</td></tr>
+<tr><td>`photo-shotlist.md`</td><td>Project artifact.</td></tr>
+<tr><td>`resources.md`</td><td>Project artifact.</td></tr>
+<tr><td>`review-evidence.md`</td><td>Project artifact.</td></tr>
+<tr><td>`risks.md`</td><td>Project artifact.</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>design.md</h2>
+
+<p>Project intent, catalog metadata, assumptions, and validation plan.</p>
+
+<h1>Design</h1>
+
+<h2>Design Intent</h2>
+
+<p>Create an L2 root-mode build packet for a small family of Andean duct flutes</p>
+<p>that can be prototyped with PVC before committing to hardwood or bamboo. The</p>
+<p>first prototype is a G4 pinkullo-style fipple flute with a removable block so</p>
+<p>the windway, window, and labium can be tuned independently from the tube.</p>
+
+<p>This packet supports issue #1 by providing a reviewable shop candidate. It does</p>
+<p>not claim L3/build-ready status until the first prototype speaks cleanly and</p>
+<p>the tuning rows in `validation.csv` are filled with measured data.</p>
+
+<h2>Governing Model</h2>
+
+<p>The starting acoustic model is an open-open pipe:</p>
+
+<pre><code>
+f = c / (2 * L_eff)
+L_eff = L_physical + 2 * 0.6 * radius
+c = 13552 in/s at 68 F
+</code></pre>
+
+<p>Tone-hole first pass:</p>
+
+<pre><code>
+distance_from_foot = acoustic_length * (fundamental_hz / hole_hz)
+</code></pre>
+
+<p>The formula sizes the bore and first-pass holes only. The duct-flute voicing is</p>
+<p>empirical: windway height, window length, block fit, labium edge quality, and</p>
+<p>breath pressure determine whether the pipe speaks.</p>
+
+<h2>Prototype Family</h2>
+
+<table>
+<tr><th>Member</th><th>Musical role</th><th>Fundamental</th><th>Bore ID</th><th>Physical length</th><th>Scale path</th></tr>
+<tr><td>Pinkullo G4</td><td>First prototype</td><td>392.00 Hz</td><td>0.625 in</td><td>16.1 in</td><td>pentatonic minor first</td></tr>
+<tr><td>Tarka A4</td><td>Higher, brighter test</td><td>440.00 Hz</td><td>0.562 in</td><td>14.3 in</td><td>pentatonic or hexatonic</td></tr>
+<tr><td>Small duct flute C5</td><td>Short proof body</td><td>523.25 Hz</td><td>0.500 in</td><td>11.9 in</td><td>pentatonic minor</td></tr>
+</table>
+
+<p>Physical lengths include first-pass end correction and 0.25 in trimming</p>
+<p>allowance. They are deliberately long until measured tuning confirms the</p>
+<p>block/window behavior.</p>
+
+<h2>Duct And Window Starter Geometry</h2>
+
+<table>
+<tr><th>Feature</th><th>G4 starter</th><th>Validation note</th></tr>
+<tr><td>Windway height</td><td>0.040 in</td><td>Shim down if breath is noisy; open slightly if it chokes</td></tr>
+<tr><td>Windway width</td><td>0.50 in</td><td>About 80% of bore ID</td></tr>
+<tr><td>Window length</td><td>0.45 in</td><td>File after first sound</td></tr>
+<tr><td>Labium angle</td><td>35 deg</td><td>Keep edge crisp and centered</td></tr>
+<tr><td>Block insertion</td><td>1.00 in</td><td>Waxed fit for removable first prototype</td></tr>
+<tr><td>Window setback from head</td><td>0.75 in</td><td>Mark from head datum before cutting</td></tr>
+</table>
+
+<h2>Scale Options</h2>
+
+<p>Pentatonic minor offsets are the first tuning target: `0, +3, +5, +7, +10,</p>
+<p>+12`. A hexatonic/diatonic test can be drilled on a sacrificial PVC body after</p>
+<p>the pentatonic body validates the duct geometry. Do not mix scale experiments</p>
+<p>with the first voicing validation body.</p>
+
+<h2>Materials</h2>
+
+<ul>
+<li>PVC proof-of-tune: 1/2 in nominal pipe or tube stock with measured actual ID.</li>
+<li>Hardwood follow-up: straight-grain cherry, maple, or walnut blank.</li>
+<li>Bamboo follow-up: only after node spacing and wall thickness are measured.</li>
+<li>Block: cedar, maple, or Delrin insert, fitted airtight but removable.</li>
+</ul>
+
+<h2>SolidWorks/OpenSCAD Handoff</h2>
+
+<p>This packet does not include production CAD. The first geometry handoff should</p>
+<p>be a simple axisymmetric bore plus rectangular window/block model with named</p>
+<p>inputs for bore ID, OD, body length, window length, windway height, and hole</p>
+<p>stations. CAD should not be treated as final until the G4 PVC body validates</p>
+<p>the windway/window relationship.</p>
+
+<h2>L2 To L3 Gates</h2>
+
+<ul>
+<li>G4 prototype speaks at low and medium breath pressure.</li>
+<li>Fundamental and five tone holes are within +/-15 cents before final tuning.</li>
+<li>Final trim brings the scale within +/-8 cents or records why that target is</li>
+</ul>
+<p>not practical.</p>
+<ul>
+<li>Block can be removed and reinstalled without changing pitch by more than</li>
+</ul>
+<p>5 cents.</p>
+<ul>
+<li>A hardwood or bamboo body copies only measured PVC geometry, not estimates.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>bom.csv</h2>
+
+<p>Starter bill of materials with part categories, quantities, drawing refs, and notes.</p>
+
+<table>
+<tr><th>item</th><th>qty</th><th>unit</th><th>estimated_cost</th><th>notes</th></tr>
+<tr><td>PVC proof tube 0.625 in ID</td><td>2</td><td>each</td><td>derived estimate 12</td><td>Measure actual ID before calculating length</td></tr>
+<tr><td>Cherry or maple blank 1 x 1 x 24 in</td><td>1</td><td>each</td><td>derived estimate 18</td><td>Hardwood follow-up after PVC validates voicing</td></tr>
+<tr><td>Cedar or maple block stock</td><td>3</td><td>blanks</td><td>derived estimate 6</td><td>Removable fipple blocks and spares</td></tr>
+<tr><td>Beeswax/paraffin sealing wax</td><td>1</td><td>small block</td><td>derived estimate 4</td><td>Temporary leak sealing and block fit tests</td></tr>
+<tr><td>Small cork/rubber sheet</td><td>1</td><td>sheet</td><td>derived estimate 5</td><td>Optional block shims</td></tr>
+<tr><td>Sandpaper 220-600 grit</td><td>1</td><td>set</td><td>derived estimate 8</td><td>Labium edge and finish</td></tr>
+<tr><td>Mineral oil or shellac</td><td>1</td><td>small bottle</td><td>derived estimate 10</td><td>Final finish after tuning</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>sourcing.csv</h2>
+
+<p>Supplier/search tracker with specs, price/date fields, lead time, substitutes, and risks.</p>
+
+<table>
+<tr><th>item</th><th>required_spec</th><th>search_terms</th><th>preferred_source</th><th>current_check_needed</th><th>substitution_notes</th></tr>
+<tr><td>PVC proof tube</td><td>measured 0.625 in ID or closest stable tube</td><td>rigid pvc tube 5/8 id</td><td>local hardware or plastics supplier</td><td>yes</td><td>Use measured ID in design table</td></tr>
+<tr><td>Hardwood blank</td><td>straight grain 1 x 1 x 24 in cherry maple or walnut</td><td>cherry turning blank 1x1x24</td><td>wood supplier</td><td>yes</td><td>Only after PVC duct geometry is validated</td></tr>
+<tr><td>Block stock</td><td>dry cedar maple or Delrin insert stock</td><td>cedar block stock delrin rod</td><td>shop scrap or plastics supplier</td><td>yes</td><td>Must fit airtight and remain removable</td></tr>
+<tr><td>Wax</td><td>beeswax or paraffin for temporary sealing</td><td>beeswax block paraffin</td><td>craft or hardware store</td><td>yes</td><td>Used for leak tests not final glue</td></tr>
+<tr><td>Finish</td><td>non-toxic oil or shellac</td><td>food safe mineral oil shellac flakes</td><td>woodworking supplier</td><td>yes</td><td>Apply after tuning is stable</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>cut-list.csv</h2>
+
+<p>Rough/final stock sizes, material, grain/orientation, operations, yield, and offcuts.</p>
+
+<table>
+<tr><th>part</th><th>qty</th><th>material</th><th>rough_dimensions_in</th><th>final_dimensions_in</th><th>operation_notes</th></tr>
+<tr><td>G4 PVC body</td><td>2</td><td>PVC tube</td><td>0.875 OD x 17.0 long</td><td>0.875 OD x 16.10 long plus trim</td><td>Leave 0.25 in extra until tuning</td></tr>
+<tr><td>G4 hardwood body</td><td>1</td><td>cherry or maple</td><td>1.00 x 1.00 x 18.0</td><td>0.875 OD x measured tuned length</td><td>Build only after PVC validation</td></tr>
+<tr><td>Removable block blanks</td><td>3</td><td>cedar maple or Delrin</td><td>0.60 x 0.60 x 1.25</td><td>fit to bore x 1.00 long</td><td>Plane/sand to airtight slip fit</td></tr>
+<tr><td>Fipple window coupon</td><td>3</td><td>same as body stock</td><td>2.0 long offcuts</td><td>window test coupons</td><td>Practice window and labium before body cut</td></tr>
+<tr><td>Hole-layout story stick</td><td>1</td><td>plywood or acrylic</td><td>1.0 x 18.0</td><td>marked stations from foot datum</td><td>Use for drilling repeatability</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>drawing-brief.md</h2>
+
+<p>Manufacturing drawing and technical product sketch brief.</p>
+
+<h1>Drawing Brief</h1>
+
+<h2>Required Sheets</h2>
+
+<p>1. Overall G4 body elevation with head datum, foot datum, window setback, and</p>
+<p>   all tone-hole stations.</p>
+<p>2. Bore and block section showing removable fipple block, windway height, and</p>
+<p>   leak-control surfaces.</p>
+<p>3. Window/labium detail with windway width, window length, ramp angle, and edge</p>
+<p>   note.</p>
+<p>4. Drill jig/story-stick layout for repeatable hole placement.</p>
+
+<h2>Datum Scheme</h2>
+
+<ul>
+<li>A: bore centerline.</li>
+<li>B: foot end after square trim.</li>
+<li>C: top surface orientation through window and front holes.</li>
+</ul>
+
+<p>All tone-hole stations are measured from datum B. Window and block dimensions</p>
+<p>are measured from the head end and cross-checked to datum A.</p>
+
+<h2>Tolerance Notes</h2>
+
+<ul>
+<li>Bore ID is measured, not assumed from nominal pipe size.</li>
+<li>Tone holes start undersize; final diameters are validation outputs.</li>
+<li>Windway height is a controlled empirical variable and should be called out as</li>
+</ul>
+<p>  adjustable on the drawing.</p>
+
+<div class="page-break"></div>
+
+<h2>assembly-manual.md</h2>
+
+<p>Shop-facing sequence, tools, fixtures, safety, tuning, finishing, and maintenance notes.</p>
+
+<h1>Assembly Manual</h1>
+
+<h2>Scope</h2>
+
+<p>This manual covers the G4 PVC proof-of-tune body. Hardwood or bamboo bodies</p>
+<p>should copy only the measured geometry from a successful PVC prototype.</p>
+
+<h2>Steps</h2>
+
+<p>1. Measure the tube ID, OD, and straightness at three stations.</p>
+<p>2. Cut the body 0.25 in long and square both ends.</p>
+<p>3. Mark the head datum, window setback, and foot datum.</p>
+<p>4. Cut a conservative rectangular window and leave the labium edge slightly</p>
+<p>   heavy for hand finishing.</p>
+<p>5. Fit a removable block so the windway is centered and airtight.</p>
+<p>6. Shim or sand the windway toward the 0.040 in starter height.</p>
+<p>7. Form the labium ramp to about 35 degrees and sharpen the edge.</p>
+<p>8. Play first sound before drilling any finger holes.</p>
+<p>9. Adjust window length and windway height until response is repeatable at low</p>
+<p>   and medium breath pressure.</p>
+<p>10. Drill tone holes undersize from the foot upward.</p>
+<p>11. Tune by gradual enlargement, recording final diameters in `validation.csv`.</p>
+<p>12. Trim the foot only after the scale is stable.</p>
+<p>13. Photograph the block, window, labium, and final hole layout for the build</p>
+<p>   log.</p>
+
+<h2>Stop Conditions</h2>
+
+<ul>
+<li>Stop if the block leaks enough to change response after reinstalling.</li>
+<li>Stop if the labium edge chips or tears; make a window coupon before recutting</li>
+</ul>
+<p>  the body.</p>
+<ul>
+<li>Stop if the first tone requires high breath pressure only; fix voicing before</li>
+</ul>
+<p>  drilling tone holes.</p>
+
+<div class="page-break"></div>
+
+<h2>validation.csv</h2>
+
+<p>Target/measured values, tolerance, environment, result, and tuning/build action log.</p>
+
+<table>
+<tr><th>check</th><th>target</th><th>method</th><th>tool</th><th>actual</th><th>pass</th><th>notes</th></tr>
+<tr><td>Actual bore ID</td><td>0.625 in +/- measured tolerance</td><td>inside caliper at three stations</td><td>digital caliper</td><td>pending</td><td>pending</td><td>Recalculate length if tube ID differs</td></tr>
+<tr><td>First sound response</td><td>stable tone at low and medium breath</td><td>play test with same player</td><td>shop notes</td><td>pending</td><td>pending</td><td>Record breath-pressure bin</td></tr>
+<tr><td>Fundamental G4</td><td>392.00 Hz +/- 15 cents before trim</td><td>chromatic tuner at 68 F</td><td>tuner</td><td>pending</td><td>pending</td><td>Trim foot after block/window settle</td></tr>
+<tr><td>Pentatonic hole 1</td><td>+3 semitones from fundamental</td><td>drill undersize then enlarge</td><td>tuner</td><td>pending</td><td>pending</td><td>Tune from foot upward</td></tr>
+<tr><td>Pentatonic hole 2</td><td>+5 semitones from fundamental</td><td>drill undersize then enlarge</td><td>tuner</td><td>pending</td><td>pending</td><td>Log hole diameter after tuning</td></tr>
+<tr><td>Pentatonic hole 3</td><td>+7 semitones from fundamental</td><td>drill undersize then enlarge</td><td>tuner</td><td>pending</td><td>pending</td><td>Watch cross-fingering leakage</td></tr>
+<tr><td>Pentatonic hole 4</td><td>+10 semitones from fundamental</td><td>drill undersize then enlarge</td><td>tuner</td><td>pending</td><td>pending</td><td>Keep ergonomic reach under review</td></tr>
+<tr><td>Octave response</td><td>+12 semitones accessible with breath shift</td><td>play test</td><td>tuner</td><td>pending</td><td>pending</td><td>Do not overclaim until repeatable</td></tr>
+<tr><td>Block reinstall repeatability</td><td>within 5 cents after removal/reinstall</td><td>tuner before/after</td><td>tuner</td><td>pending</td><td>pending</td><td>Reject loose block fit</td></tr>
+<tr><td>Leak check</td><td>no audible leak around block or window</td><td>soap bubble or breath hold</td><td>visual/play test</td><td>pending</td><td>pending</td><td>Wax temporary leaks before final fit</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>supplier-rfq.md</h2>
+
+<p>Supplier email/request-for-quote starter.</p>
+
+<h1>Supplier RFQ</h1>
+
+<h2>Request</h2>
+
+<p>Please quote the following public-safe, non-proprietary instrument-build</p>
+<p>materials or fabrication services.</p>
+
+<h2>Items</h2>
+
+<ul>
+<li>Item: TBD</li>
+<li>Quantity: TBD</li>
+<li>Material/spec: TBD</li>
+<li>Tolerance: TBD</li>
+<li>Finish: TBD</li>
+<li>Lead time target: TBD</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>visual-bom-brief.md</h2>
+
+<p>Art direction for an image-forward visual BOM.</p>
+
+<h1>Visual BOM Brief</h1>
+
+<p>Create a single-page visual BOM after the first prototype is cut. Required</p>
+<p>image panels:</p>
+
+<ul>
+<li>PVC proof body before window cutting.</li>
+<li>Removable block blanks and fitted block.</li>
+<li>Window/labium close-up.</li>
+<li>Hole-layout story stick.</li>
+<li>Tuning tools: tuner, caliper, drill index, files, wax.</li>
+</ul>
+
+<p>Each row should include quantity, material, final dimensions, and which</p>
+<p>validation row confirms the part.</p>
+
+<div class="page-break"></div>
+
+<h2>wolfram-starter.wl</h2>
+
+<p>Wolfram starter for physics, optimization, visualization, and validation.</p>
+
+<pre><code>
+(* Andean duct flute starter: open-pipe length and first-pass holes. *)
+
+ClearAll[&quot;Global`*&quot;];
+
+cInPerSec = 13552;
+a4 = 440;
+fundamentalHz = 392.0;
+boreIn = 0.625;
+radiusIn = boreIn/2;
+endCorrectionIn = 2*0.6*radiusIn;
+
+targetHz[midi_] := a4*2^((midi - 69)/12);
+centsError[measured_, target_] := 1200*Log[2, measured/target];
+physicalLengthForHz[f_] := cInPerSec/(2*f) - endCorrectionIn;
+
+scaleOffsets = {0, 3, 5, 7, 10, 12};
+scaleTable = Table[
+  With[{f = fundamentalHz*2^(offset/12)},
+    &lt;|
+      &quot;OffsetSemitones&quot; -&gt; offset,
+      &quot;TargetHz&quot; -&gt; f,
+      &quot;DistanceFromFootIn&quot; -&gt; physicalLengthForHz[fundamentalHz]*(fundamentalHz/f)
+    |&gt;
+  ],
+  {offset, scaleOffsets}
+];
+
+Dataset[scaleTable]
+
+(* Validation reminder: duct/window response is empirical and must be measured
+   before this model is used for a hardwood or bamboo body. *)
+</code></pre>
+
+<div class="page-break"></div>
+
+<h2>CHECKLIST.md</h2>
+
+<p>Project artifact.</p>
+
+<h1>Public-Ready Checklist</h1>
+
+<h2>Readiness Level</h2>
+
+<ul>
+<li>[ ] L0 Concept: target sound, family, and rough build method are documented.</li>
+<li>[ ] L1 Design: governing equations, assumptions, dimensions, BOM, and sourcing candidates are present.</li>
+<li>[ ] L2 Shop Packet: build sequence, drawings/briefs, cut list, validation checklist, hazards, and artifact paths are complete enough for careful builder review.</li>
+<li>[ ] L3 Validated Packet: validator passes, generated/rendered artifacts open, units are consistent, and sourceability/tolerance claims are checked.</li>
+<li>[ ] L4 Empirical Packet: measured build data, tuning deviations, correction loop, and catalog feedback are included.</li>
+</ul>
+
+<p>Only L3 or L4 work should be described as build-ready.</p>
+
+<h2>Packet Completeness</h2>
+
+<ul>
+<li>[ ] Replace `Andean Duct Flutes`, `L2 root-mode build packet for Andean duct flutes: pinkullo, tarka, and related fipple flutes.`, and other placeholders.</li>
+<li>[ ] Add cultural attribution and sources of inspiration.</li>
+<li>[ ] Replace placeholder photos with owned photos, renders, or honest public-safe placeholders.</li>
+<li>[ ] Fill `design.md` with instrument-specific governing equations and assumptions.</li>
+<li>[ ] Fill BOM, sourcing, cut list, validation, and family spec rows with non-placeholder values.</li>
+<li>[ ] Add OpenSCAD/SolidWorks/Wolfram handoff notes without pretending final CAD exists.</li>
+<li>[ ] Add drawings and a CNC/setup plan where applicable.</li>
+<li>[ ] Fill `resources.md` with public-safe provenance, education, maker, and license notes.</li>
+<li>[ ] Fill `jig-decision.md` for any make/order/buy/borrow fixture decisions.</li>
+<li>[ ] Run `instrument-maker-v4/scripts/validate_packet.py . --mode root --json`.</li>
+<li>[ ] Confirm no local absolute paths, private repo links, or frozen supplier-price claims.</li>
+</ul>
+
+<h2>Review Evidence</h2>
+
+<ul>
+<li>[ ] PR body includes changed behavior/artifact, physics/manufacturing assumptions, validation run, known gaps, reviewer focus, and do-not-merge-until bar.</li>
+<li>[ ] Physics gate passed: model, assumptions, units, tuning targets, and sensitivity ranges are reviewable.</li>
+<li>[ ] Manufacturing gate passed: toolchain, materials, tolerances, cut lists/jigs/CAD, and assembly order are plausible.</li>
+<li>[ ] Safety gate passed: dust, finishes, adhesives, sharp tools, tension, heat/pressure/electrical risks, and workshop constraints are addressed.</li>
+<li>[ ] Artifact gate passed: BOM, sourcing, cut list, validation, risks, drawings/CAD briefs, and rendered/generated artifacts are present or gaps are named.</li>
+<li>[ ] Empirical gate passed: measurement plan, pass/fail criteria, tuning correction path, and catalog feedback destination are stated.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>README.md</h2>
+
+<p>Project artifact.</p>
+
+<h1>Andean Duct Flutes</h1>
+
+<p>&gt; L2 root-mode build packet for a small Andean duct-flute family: pinkullo,</p>
+<p>&gt; tarka, and related fipple flutes.</p>
+
+<p>![Hero photo placeholder](images/README-placeholder.txt)</p>
+
+<h2>What This Is</h2>
+
+<p>This repository documents a contemporary workshop build packet for Andean</p>
+<p>duct flutes: block-and-window flutes where a windway directs the player&#x27;s air</p>
+<p>jet across a labium. The first build target is a **G4 pinkullo-style</p>
+<p>prototype** because it is large enough to make the duct geometry forgiving,</p>
+<p>short enough for common stock, and useful as a reference before lower tarka</p>
+<p>members are attempted.</p>
+
+<p>The packet is intentionally **L2, not L3**. It is ready for review as a</p>
+<p>shop-packet candidate, but it is not build-ready until the windway, window,</p>
+<p>breath pressure, and tuning data are measured on a physical prototype.</p>
+
+<p>Refs #1.</p>
+
+<h2>Design Overview</h2>
+
+<table>
+<tr><th>Topic</th><th>Packet decision</th></tr>
+<tr><td>Governing model</td><td>Open-open pipe first pass: `f = c / (2 * L_eff)`</td></tr>
+<tr><td>Voicing model</td><td>Duct windway plus window/labium; empirical breath-pressure validation required</td></tr>
+<tr><td>First prototype</td><td>G4 pinkullo-style duct flute</td></tr>
+<tr><td>Scale options</td><td>Pentatonic minor first, hexatonic/diatonic variant after tone-hole validation</td></tr>
+<tr><td>Materials</td><td>PVC proof-of-tune body first; hardwood or bamboo second</td></tr>
+<tr><td>Manufacturing path</td><td>Drill/ream bore, cut fipple window, fit block, drill undersize holes, tune by controlled enlargement</td></tr>
+</table>
+
+<h2>Why Duct Geometry Is The Center Of The Packet</h2>
+
+<p>The tube length equation only sizes the air column. The instrument will not</p>
+<p>speak cleanly unless the duct and labium are tuned together:</p>
+
+<ul>
+<li>windway height starts near 0.040 in for the G4 prototype and is adjusted for</li>
+</ul>
+<p>  response, not volume;</p>
+<ul>
+<li>window length starts at 0.45 in and is filed after first-sound tests;</li>
+<li>labium ramp angle starts near 35 degrees, with a crisp edge and no torn grain;</li>
+<li>block fit must be airtight enough that breath energy exits through the</li>
+</ul>
+<p>  windway, not around the plug;</p>
+<ul>
+<li>breath pressure is logged as low/medium/high subjective bins until a manometer</li>
+</ul>
+<p>  test is added.</p>
+
+<h2>Packet Map</h2>
+
+<table>
+<tr><th>Path</th><th>Purpose</th></tr>
+<tr><td>`design.md`</td><td>Governing model, duct geometry, scale options, and assumptions</td></tr>
+<tr><td>`family-spec.csv`</td><td>G4/A4/C5 starter family with bore, length, window, and hole schedule summary</td></tr>
+<tr><td>`bom.csv`</td><td>Materials and tooling for PVC proof-of-tune plus hardwood follow-up</td></tr>
+<tr><td>`sourcing.csv`</td><td>Source/spec tracker; current prices still require live purchasing checks</td></tr>
+<tr><td>`cut-list.csv`</td><td>Body, block, test coupons, and jig blanks</td></tr>
+<tr><td>`assembly-manual.md`</td><td>Shop sequence from blank prep through first tuning</td></tr>
+<tr><td>`validation.csv`</td><td>Pitch, response, leak, and breath-pressure checks</td></tr>
+<tr><td>`drawing-brief.md`</td><td>Required drawing sheets and datum scheme</td></tr>
+<tr><td>`visual-bom-brief.md`</td><td>Visual BOM plate plan</td></tr>
+<tr><td>`jig-decision.md`</td><td>Drill V-block, fipple-window guide, and hole-layout fixture choices</td></tr>
+<tr><td>`resources.md`</td><td>Cultural and engineering reference plan</td></tr>
+<tr><td>`risks.md`</td><td>Acoustic, structural, ergonomic, sourcing, and finish risks</td></tr>
+<tr><td>`wolfram-starter.wl`</td><td>Parametric frequency and hole-position starter</td></tr>
+</table>
+
+<h2>Build Order</h2>
+
+<p>1. Build PVC G4 proof-of-tune body and keep the duct block removable.</p>
+<p>2. Establish repeatable first sound at low and medium breath pressure.</p>
+<p>3. Drill tone holes undersize and tune from foot to head.</p>
+<p>4. Record frequency and response data in `validation.csv`.</p>
+<p>5. Transfer only the measured duct/window geometry to hardwood or bamboo.</p>
+
+<h2>Status</h2>
+
+<table>
+<tr><th>Area</th><th>Status</th></tr>
+<tr><td>Packet docs</td><td>L2 root-mode candidate</td></tr>
+<tr><td>Drawings/CAD</td><td>Drawing brief and starter fixture plan included</td></tr>
+<tr><td>Photos</td><td>Placeholder only</td></tr>
+<tr><td>Validation</td><td>Planned, no measured prototype yet</td></tr>
+<tr><td>Issue linkage</td><td>Refs #1, does not close #1</td></tr>
+</table>
+
+<h2>License</h2>
+
+<p>[CC BY 4.0](LICENSE) - engineering documentation only. This packet is a</p>
+<p>contemporary workshop interpretation and is not a claim of cultural ownership.</p>
+
+<div class="page-break"></div>
+
+<h2>family-spec.csv</h2>
+
+<p>Project artifact.</p>
+
+<table>
+<tr><th>member_id</th><th>name</th><th>fundamental_hz</th><th>bore_id_in</th><th>od_in</th><th>physical_length_in</th><th>windway_height_in</th><th>windway_width_in</th><th>window_length_in</th><th>labium_angle_deg</th><th>scale_offsets</th><th>prototype_status</th></tr>
+<tr><td>ADF-G4-P1</td><td>Pinkullo G4 first prototype</td><td>392.00</td><td>0.625</td><td>0.875</td><td>16.10</td><td>0.040</td><td>0.500</td><td>0.450</td><td>35</td><td>0 3 5 7 10 12</td><td>PVC proof-of-tune</td></tr>
+<tr><td>ADF-A4-P2</td><td>Tarka A4 high prototype</td><td>440.00</td><td>0.562</td><td>0.812</td><td>14.30</td><td>0.036</td><td>0.450</td><td>0.400</td><td>35</td><td>0 3 5 7 10 12</td><td>queued after G4 voicing</td></tr>
+<tr><td>ADF-C5-P3</td><td>Small duct flute C5 proof body</td><td>523.25</td><td>0.500</td><td>0.750</td><td>11.90</td><td>0.032</td><td>0.400</td><td>0.350</td><td>35</td><td>0 3 5 7 10 12</td><td>scale experiment body</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>jig-decision.md</h2>
+
+<p>Project artifact.</p>
+
+<h1>Jig Decision</h1>
+
+<table>
+<tr><th>Operation</th><th>Jig choice</th><th>Reason</th><th>Release check</th></tr>
+<tr><td>Body drilling/holding</td><td>V-block with centerline fence</td><td>Keeps round tube stable without crushing</td><td>Tube cannot roll under hand pressure</td></tr>
+<tr><td>Window cutting</td><td>Clamp-on window guide</td><td>Protects setback and square shoulders</td><td>Test on coupon before body</td></tr>
+<tr><td>Block fitting</td><td>Bore-matched sanding mandrel</td><td>Lets block fit be tuned gradually</td><td>Block seals and can be removed</td></tr>
+<tr><td>Tone-hole drilling</td><td>Story stick plus V-block</td><td>Faster than CNC for L2 proof body</td><td>Stations match drawing within 0.02 in</td></tr>
+<tr><td>Foot trimming</td><td>Miter box or lathe facing</td><td>Keeps foot square during tuning</td><td>End remains square after each trim</td></tr>
+</table>
+
+<div class="page-break"></div>
+
+<h2>photo-shotlist.md</h2>
+
+<p>Project artifact.</p>
+
+<h1>Photo Shotlist</h1>
+
+<ul>
+<li>Hero image of completed instrument or honest concept placeholder.</li>
+<li>Scale reference with ruler/calipers.</li>
+<li>Material blank before cutting.</li>
+<li>Key operations and jigs.</li>
+<li>Detail shots of acoustic features.</li>
+<li>Final validation setup.</li>
+</ul>
+
+<div class="page-break"></div>
+
+<h2>resources.md</h2>
+
+<p>Project artifact.</p>
+
+<h1>Resources</h1>
+
+<h2>Cultural Context</h2>
+
+<p>This packet treats Andean duct flutes as living Indigenous and regional</p>
+<p>instruments, not generic &quot;folk flutes.&quot; Public-facing writing should identify</p>
+<p>the specific form being built when known, such as pinkullo or tarka, and avoid</p>
+<p>claiming authenticity for a workshop prototype.</p>
+
+<h2>Engineering References To Gather Before L3</h2>
+
+<ul>
+<li>Measured examples of pinkullo/tarka bore, window, and block geometry.</li>
+<li>Player demonstrations showing breath pressure and articulation.</li>
+<li>Photos of duct/window construction from makers who permit reference use.</li>
+<li>Temperature and humidity notes from the tuning session.</li>
+</ul>
+
+<h2>Related Repos</h2>
+
+<ul>
+<li>`tonykoop/instrument-maker` for governing formulas and packet validation.</li>
+<li>`tonykoop/siku-zampona` for Andean provenance handling and pipe-array tuning</li>
+</ul>
+<p>  discipline.</p>
+<ul>
+<li>`tonykoop/flutes` for general wind-instrument measurement habits. NAF K2</li>
+</ul>
+<p>  corrections do not transfer to this duct-flute packet.</p>
+
+<div class="page-break"></div>
+
+<h2>review-evidence.md</h2>
+
+<p>Project artifact.</p>
+
+<h1>Review Evidence</h1>
+
+<p>Refs #1.</p>
+
+<h2>Round 3 Scope</h2>
+
+<ul>
+<li>Added an L2 root-mode build packet scaffold and hand-tuned it for Andean</li>
+</ul>
+<p>  duct-flute specifics: fipple block, windway, window/labium, breath pressure,</p>
+<p>  pentatonic-first scale validation, and PVC-to-hardwood/bamboo prototype path.</p>
+<ul>
+<li>This packet does not claim L3/build-ready status.</li>
+</ul>
+
+<h2>Gates Before Close</h2>
+
+<ul>
+<li>Build and measure the G4 proof-of-tune body.</li>
+<li>Record actual bore ID, block reinstall repeatability, breath response, final</li>
+</ul>
+<p>  hole diameters, and cents error in `validation.csv`.</p>
+<ul>
+<li>Promote measured duct/window geometry before cutting a hardwood or bamboo</li>
+</ul>
+<p>  body.</p>
+
+<div class="page-break"></div>
+
+<h2>risks.md</h2>
+
+<p>Project artifact.</p>
+
+<h1>Risks</h1>
+
+<table>
+<tr><th>ID</th><th>Category</th><th>Risk</th><th>Verification test</th><th>Mitigation</th></tr>
+<tr><td>ADF-AC-01</td><td>Acoustic</td><td>Duct/window geometry does not speak below high breath pressure</td><td>First-sound test before drilling holes</td><td>Keep block removable; tune windway/window first</td></tr>
+<tr><td>ADF-AC-02</td><td>Acoustic</td><td>Tone-hole formula misses because effective open point shifts</td><td>Drill undersize and log final diameters</td><td>Tune from foot upward and update design table</td></tr>
+<tr><td>ADF-ST-01</td><td>Structural</td><td>Labium edge chips in hardwood</td><td>Cut window coupon first</td><td>Use PVC proof body and sharp tools</td></tr>
+<tr><td>ADF-ER-01</td><td>Ergonomic</td><td>Hole spacing is too wide on low member</td><td>Paper reach test and mock grip</td><td>Start with G4 before lower tarka body</td></tr>
+<tr><td>ADF-SU-01</td><td>Supply</td><td>Nominal PVC ID differs from formula assumptions</td><td>Measure ID at intake</td><td>Recalculate length with measured bore</td></tr>
+<tr><td>ADF-FI-01</td><td>Fit/finish</td><td>Removable block leaks or shifts after reinstall</td><td>Tuner before/after block reinstall</td><td>Shim/wax block; reject loose fit</td></tr>
+</table>
+</body></html>

@@ -1,0 +1,11 @@
+check,target,method,tool,actual,pass,notes
+Actual bore ID,0.625 in +/- measured tolerance,inside caliper at three stations,digital caliper,pending,pending,Recalculate length if tube ID differs
+First sound response,stable tone at low and medium breath,play test with same player,shop notes,pending,pending,Record breath-pressure bin
+Fundamental G4,392.00 Hz +/- 15 cents before trim,chromatic tuner at 68 F,tuner,pending,pending,Trim foot after block/window settle
+Pentatonic hole 1,+3 semitones from fundamental,drill undersize then enlarge,tuner,pending,pending,Tune from foot upward
+Pentatonic hole 2,+5 semitones from fundamental,drill undersize then enlarge,tuner,pending,pending,Log hole diameter after tuning
+Pentatonic hole 3,+7 semitones from fundamental,drill undersize then enlarge,tuner,pending,pending,Watch cross-fingering leakage
+Pentatonic hole 4,+10 semitones from fundamental,drill undersize then enlarge,tuner,pending,pending,Keep ergonomic reach under review
+Octave response,+12 semitones accessible with breath shift,play test,tuner,pending,pending,Do not overclaim until repeatable
+Block reinstall repeatability,within 5 cents after removal/reinstall,tuner before/after,tuner,pending,pending,Reject loose block fit
+Leak check,no audible leak around block or window,soap bubble or breath hold,visual/play test,pending,pending,Wax temporary leaks before final fit
