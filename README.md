@@ -18,6 +18,14 @@ The packet is intentionally **L2, not L3**. It is ready for review as a
 shop-packet candidate, but it is not build-ready until the windway, window,
 breath pressure, and tuning data are measured on a physical prototype.
 
+The acoustic model in this repo is an **L1/L2 validation scaffold only**. See
+[`reference/duct-flute-acoustic-law.md`](reference/duct-flute-acoustic-law.md)
+for the explicit duct/flue/edge-tone/pipe boundary conditions, end-correction
+treatment, and the list of measurement fields that are still unknown. The
+scaffold does **not** create build-ready tuning. Final fundamental, hole
+positions, and voicing are decided by measurement on a first prototype, not by
+the equations.
+
 Refs #1.
 
 ## Design Overview
@@ -62,6 +70,7 @@ speak cleanly unless the duct and labium are tuned together:
 | `resources.md` | Cultural and engineering reference plan |
 | `risks.md` | Acoustic, structural, ergonomic, sourcing, and finish risks |
 | `wolfram-starter.wl` | Parametric frequency and hole-position starter |
+| `reference/duct-flute-acoustic-law.md` | Explicit duct/flue/edge-tone/pipe model, end-correction treatment, and unknown-measurement fields |
 
 ## Build Order
 
