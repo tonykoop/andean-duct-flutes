@@ -18,4 +18,4 @@ Foot end correction (dL_foot),measure with all holes closed,caliper at foot open
 Free jet length (L_j),windway exit to labium tip,caliper or shadow-line measurement,caliper,pending,pending,Edge-tone behavior depends on this
 Edge-tone speak threshold (p_breath_min),lowest breath pressure that speaks cleanly,play test with breath-pressure bins,shop notes,pending,pending,Record bin name and player; manometer optional
 Hole chimney correction (dL_hole_i),per-hole correction after tuning,measure post-tuning hole diameter and wall thickness,caliper + tuner,pending,pending,Required if a second body is to copy this geometry
-Block-removal pitch drift (df_block),pitch shift before/after block removal,tuner before, remove, reinstall, tuner,tuner,pending,pending,Greater than 5 cents indicates loose or shifting block fit
+Block-removal pitch drift (df_block),pitch shift before/after block removal,"tuner before, remove, reinstall, tuner",tuner,pending,pending,Greater than 5 cents indicates loose or shifting block fit
