@@ -1,0 +1,21 @@
+check_id,target,method,captured_value,captured_unit,breath_pressure_bin,temperature_c,captured_at,player,notes
+Actual bore ID,0.625 in +/- measured tolerance,inside caliper at three stations,pending,in,n/a,pending,pending,pending,Capture min/avg/max across three stations in notes.
+First sound response,stable tone at low and medium breath,play test with same player,pending,bin-label,pending,pending,pending,pending,"Acceptable bins: low, mid, high. See protocol."
+Fundamental G4,392.00 Hz +/- 15 cents before trim,chromatic tuner at 68 F,pending,Hz,pending,pending,pending,pending,Also record cents deviation in notes.
+Pentatonic hole 1,+3 semitones from fundamental,drill undersize then enlarge,pending,Hz,pending,pending,pending,pending,Log final hole diameter and cents error in notes.
+Pentatonic hole 2,+5 semitones from fundamental,drill undersize then enlarge,pending,Hz,pending,pending,pending,pending,Log final hole diameter and cents error in notes.
+Pentatonic hole 3,+7 semitones from fundamental,drill undersize then enlarge,pending,Hz,pending,pending,pending,pending,Log final hole diameter and cents error in notes.
+Pentatonic hole 4,+10 semitones from fundamental,drill undersize then enlarge,pending,Hz,pending,pending,pending,pending,Log final hole diameter and cents error in notes.
+Octave response,+12 semitones accessible with breath shift,play test,pending,bool,pending,pending,pending,pending,Mark TRUE only if repeatable across three attempts.
+Block reinstall repeatability,within 5 cents after removal/reinstall,tuner before/after,pending,cents,pending,pending,pending,pending,Capture absolute drift in cents (signed).
+Leak check,no audible leak around block or window,soap bubble or breath hold,pending,bool,n/a,pending,pending,pending,Mark TRUE if no leak; otherwise describe location in notes.
+Ambient temperature at measurement (T_meas),record actual room temperature,thermometer,pending,C,n/a,pending,pending,pending,Required before any c or L_eff calc. See protocol.
+Speed of sound at T_meas (c_meas),derive c_meas from T_meas,c = 13552 * sqrt(T_K / 293.15) in/s,pending,in/s,n/a,pending,pending,pending,Compute from T_meas captured above; do not assume 13552.
+Measured fundamental (f_meas),capture before any trim,chromatic tuner,pending,Hz,pending,pending,pending,pending,Log breath-pressure bin used during capture.
+Measured effective length (L_eff_meas),solve from f_meas and c_meas,L_eff = c_meas / (2 * f_meas),pending,in,n/a,pending,pending,pending,Compute from c_meas and f_meas captured above.
+Window end correction (dL_window),separate from foot end correction,close foot and re-measure or use textbook seed only as last resort,pending,in,pending,pending,pending,pending,Textbook 0.6r seed is a guess - record measured value.
+Foot end correction (dL_foot),measure with all holes closed,caliper at foot opening + tuner residual,pending,in,pending,pending,pending,pending,Chamfer or wall thickness shifts value.
+Free jet length (L_j),windway exit to labium tip,caliper or shadow-line measurement,pending,in,n/a,pending,pending,pending,Edge-tone behavior depends on this.
+Edge-tone speak threshold (p_breath_min),lowest breath pressure that speaks cleanly,play test with breath-pressure bins,pending,bin-label,pending,pending,pending,pending,Record bin name and player. Manometer optional.
+Hole chimney correction (dL_hole_i),per-hole correction after tuning,measure post-tuning hole diameter and wall thickness,pending,in,n/a,pending,pending,pending,Capture per-hole values in notes (one log row covers all four holes' summary).
+Block-removal pitch drift (df_block),delta from before to after block removal/reinstall cycle,tuner with same setup pre/post,pending,cents,pending,pending,pending,pending,Distinct from row 9 (repeatability) - this is the magnitude only.
