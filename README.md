@@ -1,5 +1,7 @@
 # Andean Duct Flutes
 
+**Status: L2 V5 build-packet candidate.** Duct-flute family packet with design documents, BOM, Wolfram source, and validation rows. Not build-ready until prototype measurements replace TBD values in `validation.csv`. All visual outputs use `derived_preview` or `pending_measurement` authority.
+
 > L2 root-mode build packet for a small Andean duct-flute family: pinkullo,
 > tarka, and related fipple flutes.
 
