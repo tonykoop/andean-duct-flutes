@@ -71,7 +71,7 @@ speak cleanly unless the duct and labium are tuned together:
 | `jig-decision.md` | Drill V-block, fipple-window guide, and hole-layout fixture choices |
 | `resources.md` | Cultural and engineering reference plan |
 | `risks.md` | Acoustic, structural, ergonomic, sourcing, and finish risks |
-| `wolfram-starter.wl` | Parametric frequency and hole-position starter |
+| `andean-duct-flutes-starter.wl` | Parametric frequency and hole-position starter |
 | `reference/duct-flute-acoustic-law.md` | Explicit duct/flue/edge-tone/pipe model, end-correction treatment, and unknown-measurement fields |
 
 ## Build Order

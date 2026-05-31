@@ -16,7 +16,7 @@ Packet folder: `/tmp/andean-duct-flutes-codex-bob-r3-build-packet`
 | `validation.csv` | Target/measured values, tolerance, environment, result, and tuning/build action log. |
 | `supplier-rfq.md` | Supplier email/request-for-quote starter. |
 | `visual-bom-brief.md` | Art direction for an image-forward visual BOM. |
-| `wolfram-starter.wl` | Wolfram starter for physics, optimization, visualization, and validation. |
+| `andean-duct-flutes-starter.wl` | Wolfram starter for physics, optimization, visualization, and validation. |
 | `CHECKLIST.md` | Project artifact. |
 | `README.md` | Project artifact. |
 | `family-spec.csv` | Project artifact. |
@@ -301,7 +301,7 @@ validation row confirms the part.
 
 <div class="page-break"></div>
 
-## wolfram-starter.wl
+## andean-duct-flutes-starter.wl
 
 Wolfram starter for physics, optimization, visualization, and validation.
 
@@ -449,7 +449,7 @@ speak cleanly unless the duct and labium are tuned together:
 | `jig-decision.md` | Drill V-block, fipple-window guide, and hole-layout fixture choices |
 | `resources.md` | Cultural and engineering reference plan |
 | `risks.md` | Acoustic, structural, ergonomic, sourcing, and finish risks |
-| `wolfram-starter.wl` | Parametric frequency and hole-position starter |
+| `andean-duct-flutes-starter.wl` | Parametric frequency and hole-position starter |
 
 ## Build Order
 
